@@ -1,16 +1,24 @@
-# Build fails with mingw
+# Makefile
 
 CC=gcc
-CFLAGS=-Wall -std=gnu99 -O3
+CFLAGS=-Wall -std=gnu99
 
-all : lychrel
+LDFLAGS=-L ./
 
-lychrel: lychrel.c
-	$(CC) -o lychrel $(CFLAGS) lychrel.c
+all : checklychrel
+
+checklychrel: checklychrel.c liblychrel
+	$(CC) -o checklychrel $(CFLAGS) checklychrel.c -L ./ -llychrel
+
+liblychrel: lychrel.c
+	$(CC) -o liblychrel.so -shared $(CFLAGS) lychrel.c
+
+.c.o:
+	$(CC) -c $(CFLAGS) $(INCLUDE) -c $< -o $@
 
 .PHONY=clean
 
 clean:
-	rm lychrel
+	rm checklychrel *.so
 
 # eof

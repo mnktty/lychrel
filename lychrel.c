@@ -1,8 +1,9 @@
+#include "lychrel.h"
 #include <stdio.h>
-#include <stdbool.h>
 #include <memory.h>
 #include <limits.h>
 #include <assert.h>
+
 
 /* Written in C, against Bob Martin's screencast assignment *PRIOR* to viewing
  * the screen cast. Took approximately 1 hr to get it working and may be another
@@ -17,22 +18,12 @@
 /* u64 will not need more than 32 digits */
 #define MAX_SIZE (32)
 
-typedef unsigned long long u64;
-typedef unsigned int u32;
-
 typedef struct { 
     u32 buffer[MAX_SIZE];
     u32 size;
 } Stack;
 
-typedef struct {
-    u64 output;
-    u32 iterations;
-    bool converged;
-} Result;
-
-
-void init_stack(Stack* const restrict s) {
+static void init_stack(Stack* const restrict s) {
     memset (s, 0, sizeof(Stack));
 }
 
@@ -42,7 +33,7 @@ static inline void push_stack(Stack* const restrict s, const u64 elem) {
     s->buffer[s->size++] = elem;
 }
 
-void split_digits(Stack* const restrict s, u64 input) {
+static void split_digits(Stack* const restrict s, u64 input) {
     assert(s && s->size < MAX_SIZE);
     u32 rem = 0;
 
@@ -105,36 +96,6 @@ Result lychrel(const u64 input) {
         current = next;
     }    
     return r;
-}
-
-void testAllHelpers() {
-    int input = 12345;
-    assert (54321 == reverse(input));
-    assert (!is_palindrome(12345));
-    assert(is_palindrome(12321));
-    assert(is_palindrome(123454321));
-    assert(is_palindrome(1));
-    assert(is_palindrome(9));
-}
-
-void testLychrel() {
-    u64 input_vector[] = {1, 2, 11, 21, 32, 89, 121, 156, 195, 196, 197, 246};
-
-    u32 i;
-    for (i = 0; i < 12; ++i) {
-        Result r = lychrel(input_vector[i]);
-        char *message = r.converged ? 
-            "Lychrel Number, converges after %d iterations: %lld --> %lld\n" : 
-            "NOT Lychrel Number, no convergence after %d iterations (u64 overflows): %lld --> %lld\n";
-        printf(message, r.iterations, input_vector[i], r.output);
-    }
-}
-
-
-int main(int argc, char *argv[]) {
-    // testAllHelpers();
-    testLychrel();
-    return 0;
 }
 
 /* eof */
