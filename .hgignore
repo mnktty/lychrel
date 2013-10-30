@@ -1,0 +1,8 @@
+syntax: glob
+
+*~
+*.exe
+*.out
+*.pyc
+*.o
+*.obj
