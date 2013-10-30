@@ -71,31 +71,35 @@ static inline u64 next_number(const u64 input) {
     return input + reverse(input);
 }
 
-Result lychrel(const u64 input) {
-    Result r = {.output = -1, .iterations = 0, .converged = false};
+void lychrel(const u64 input, Result* const r) {
+
+    assert(r);
+    r->output = -1;
+    r->iterations = 0;
+    r->converged = false;
+
     u64 next, current;
     next = current = input;     /* next and current numbers in the chain */
 
     while(1) {
         if (is_palindrome(next)) {
-            r.output = next;
-            r.converged = true;
+            r->output = next;
+            r->converged = true;
             break;
         }
 
         next = next_number(current);
-        ++r.iterations;
+        ++r->iterations;
 
         /* handle u64 overflow */
         if ((ULLONG_MAX - current < next)) {
-            r.output = next;
+            r->output = next;
             break;
         }
 
-        // printf("%lld --> %lld : %d\n", current, next, r.iterations);
+        // printf("%lld --> %lld : %d\n", current, next, r->iterations);
         current = next;
     }    
-    return r;
 }
 
 /* eof */

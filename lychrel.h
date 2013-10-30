@@ -14,6 +14,6 @@ typedef struct {
 
 bool is_palindrome(const u64 input);
 u64 reverse(u64 input);
-Result lychrel(const u64 input);
+void lychrel(const u64 input, Result* const r);
 
 #endif /* _LYCHREL_H_ */

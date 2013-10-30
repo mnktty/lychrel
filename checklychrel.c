@@ -17,7 +17,8 @@ void testLychrel() {
 
     u32 i;
     for (i = 0; i < 12; ++i) {
-        Result r = lychrel(input_vector[i]);
+        Result r;
+        lychrel(input_vector[i], &r);
         char *message = r.converged ? 
             "Lychrel Number, converges after %d iterations: %lld --> %lld\n" : 
             "NOT Lychrel Number, no convergence after %d iterations (u64 overflows): %lld --> %lld\n";
@@ -29,6 +30,7 @@ void testLychrel() {
 int main(int argc, char *argv[]) {
     testAllHelpers();
     testLychrel();
+    // printf("sizeof(Result): %d\n", sizeof(Result));
     return 0;
 }
 
