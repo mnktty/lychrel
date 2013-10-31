@@ -17,6 +17,16 @@ The code can be tested in two ways:
 A small test data table that can be driven using Robot Framework
 http://robotframework.googlecode.com/ is also written. 
 
+Usage
+-----
+
+The algorithm (.so) and C test code can be built with the Makefile. Do not
+forget to set .so in the LD_LIBRARY_PATH - you can source setenv.sh for
+this. CheckLychrel.py shows how to test it directly (in a data driven manner)
+with python. The same tests can be run using Robot as
+
+pybot CheckLychrel.tsv
+
 Comments
 --------
 
