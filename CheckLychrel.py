@@ -45,15 +45,25 @@ def verify_lychrel(num, expected_output, expected_iterations):
                              ', Got {3} after {4} iterations'.format(num, expected_output, expected_iterations,
                                                                      output, iterations))
 
+def run_unit_tests_from_executable():
+    "Trigger unit tests written in C"
+    import subprocess
+    # a very stupid implementation, but it works
+    subprocess.call("./checklychrel")
    
 # ------------------------------------------------------------
 
 if __name__ == '__main__':
     # verify the programmer's way
     # check_lychrel_many()
-
+    
     # quick check to ensure script called by Robot works 
-    verify_lychrel('1', '1', '0')
+    # verify_lychrel('1', '1', '0')
+
+    # quick check to verify triggering native executable's execution
+    run_unit_tests_from_executable()
+
+    pass
 
 # eof
 
