@@ -48,9 +48,13 @@ def verify_lychrel(num, expected_output, expected_iterations):
 def run_unit_tests_from_executable():
     "Trigger unit tests written in C"
     import subprocess
-    # a very stupid implementation, but it works
-    subprocess.call("./checklychrel")
-   
+
+    # if you do this, things will fail (since liblychrel.so cannot be found)
+    # subprocess.check_call(['./checklychrel'])
+    
+    # but calling this is fine since we set the LD_LIBRARY_PATH
+    subprocess.check_call(['env', 'LD_LIBRARY_PATH=:/home/precise/svn/experiment/lychrel', './checklychrel'])
+
 # ------------------------------------------------------------
 
 if __name__ == '__main__':

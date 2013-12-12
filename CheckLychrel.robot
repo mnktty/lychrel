@@ -1,7 +1,7 @@
 | *** Settings *** | 
 
-| [Documentation]  | Checks (testcases) for validating lychrel numbers |
-| Library          | CheckLychrel.py |
+| Documentation | Checks (testcases) for validating lychrel numbers |
+| Library       | CheckLychrel.py                                   |
 
 | *** Test Case *** |
 
