@@ -48,12 +48,16 @@ def verify_lychrel(num, expected_output, expected_iterations):
 def run_unit_tests_from_executable():
     "Trigger unit tests written in C"
     import subprocess
+    from robot.api import logger
 
     # if you do this, things will fail (since liblychrel.so cannot be found)
     # subprocess.check_call(['./checklychrel'])
     
     # but calling this is fine since we set the LD_LIBRARY_PATH
-    subprocess.check_call(['env', 'LD_LIBRARY_PATH=:/home/precise/svn/experiment/lychrel', './checklychrel'])
+    v = subprocess.check_output(['env', 'LD_LIBRARY_PATH=:/home/precise/svn/experiment/lychrel', './checklychrel'])
+
+    # let us also log the output in the report
+    logger.info('Output of C unit tests: {0} '.format(v))
 
 # ------------------------------------------------------------
 
