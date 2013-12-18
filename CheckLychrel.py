@@ -54,10 +54,12 @@ def run_unit_tests_from_executable():
     # subprocess.check_call(['./checklychrel'])
     
     # but calling this is fine since we set the LD_LIBRARY_PATH
-    v = subprocess.check_output(['env', 'LD_LIBRARY_PATH=:/home/precise/svn/experiment/lychrel', './checklychrel'])
+    v = subprocess.check_output(['env', 'LD_LIBRARY_PATH=:/home/precise/svn/experiment/lychrel', 'valgrind', './checklychrel'], stderr=subprocess.STDOUT)
 
     # let us also log the output in the report
     logger.info('Output of C unit tests: {0} '.format(v))
+    if not v.find('All heap blocks were freed -- no leaks are possible'):
+        raise AssertionError('Valgrind tests failed - check logs to see memory leak details')
 
 # ------------------------------------------------------------
 
