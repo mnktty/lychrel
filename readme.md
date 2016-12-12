@@ -1,5 +1,4 @@
-Overview
---------
+# Overview
 
 An example for verifying Lychrel numbers, written before watching Robert
 Martin's screen cast on Lychrel numbers. You may find details about Lychrel
@@ -22,28 +21,26 @@ http://robotframework.googlecode.com/ is also written.
 The same (almost) table is available in .tsv and .txt (pipe separated) format
 for illustration.
 
-Usage
------
+# Usage
 
 The algorithm (.so) and C test code can be built with the Makefile. Do not
 forget to set .so in the LD_LIBRARY_PATH - you can 'source setenv.sh' for
 this. CheckLychrel.py shows how to test it directly (in a data driven manner)
 with python. The same tests can be run using Robot as follows:
 
-# for running all test cases
-pybot CheckLychrel.robot
+    # for running all test cases
+    pybot CheckLychrel.robot
 
-# for using a specific tag
-pybot --include sanity CheckLychrel.robot
-
-# for running a specific testcase by name
-pybot --test "Run Unit Tests Written in C" CheckLychrel.robot
+    # for using a specific tag
+    pybot --include sanity CheckLychrel.robot
+    
+    # for running a specific testcase by name
+    pybot --test "Run Unit Tests Written in C" CheckLychrel.robot
 
 If you like GUI, consider using RIDE (Robot IDE). It offers a nice GUI interface
 for test management, editing, search, execution and reporting.
 
-Tips and Tricks
----------------
+# Tips and Tricks
 
 1. Writing robot-ified python scripts is quite straight forward once python
    calls work. (This can be done either with ctypes or Boost). Note: args (in
@@ -64,6 +61,5 @@ Tips and Tricks
 
 5. Bug: RIDE can screw up your test files in txt + pipes - by altering the
    format - if you change the preferences. This was experienced while editing
-   .txt files with RIDE and saving them as back (in v2.7.7)
+   `.txt` files with RIDE and saving them as back (in v2.7.7)
 
--apillai
