@@ -1,3 +1,5 @@
+# See http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#plain-text-format
+
 | *** Settings *** | 
 
 | Documentation | Checks (testcases) for validating lychrel numbers |

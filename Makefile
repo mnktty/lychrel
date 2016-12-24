@@ -1,7 +1,7 @@
 # Makefile
 
 CC=gcc
-CFLAGS=-Wall -std=gnu99
+CFLAGS=-Wall -std=gnu99 -fPIC
 
 LDFLAGS=-L ./
 
@@ -19,6 +19,7 @@ liblychrel: lychrel.c
 .PHONY=clean
 
 clean:
-	rm checklychrel *.so
+	rm checklychrel *.so *.pyc
+	rm log.html report.html output.xml
 
 # eof

@@ -18,15 +18,23 @@ The code can be tested in two ways:
 A small test data table that can be driven using Robot Framework
 http://robotframework.googlecode.com/ is also written. 
 
-The same (almost) table is available in .tsv and .txt (pipe separated) format
-for illustration.
+The (almost) same table is available in `.tsv` and `.txt` (pipe separated)
+format for illustration. (I find the former easier for text editing and probably
+the latter with excel)
+
+# Pre-requisites
+
+You will need robotframework to be installed - see its user page for
+instructions. An idea of how to write keywords for Robot is also expected - see
+http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#creating-user-keywords
 
 # Usage
 
-The algorithm (.so) and C test code can be built with the Makefile. Do not
-forget to set .so in the LD_LIBRARY_PATH - you can 'source setenv.sh' for
-this. CheckLychrel.py shows how to test it directly (in a data driven manner)
-with python. The same tests can be run using Robot as follows:
+The algorithm (.so) and C test code can be built with the `Makefile`. Do not
+forget to set `.so` in the `LD_LIBRARY_PATH` - you can `source setenv.sh` for
+this. `CheckLychrel.py` shows how to test it directly (in a data driven manner)
+with python. The same tests can be run using Robot (choose either `.tsv` or
+`.robot` file as you please) as follows:
 
     # for running all test cases
     pybot CheckLychrel.robot
@@ -57,9 +65,12 @@ for test management, editing, search, execution and reporting.
 
 4. With custom test libs and extended keywords (like what we have here), it can
    become tricky when execution fails. Check if the python script works from the
-   command line and if it matches the keyword *before* blaming robot.
+   command line and if it matches the keyword *before* blaming
+   robot. e.g. `run_unit_tests_from_executable` requires valgrind and robot to
+   be installed. And the the python code sets `LD_LIBRARY_PATH` with the
+   assumption that `.so` is available in current working directory.
 
-5. Bug: RIDE can screw up your test files in txt + pipes - by altering the
-   format - if you change the preferences. This was experienced while editing
-   `.txt` files with RIDE and saving them as back (in v2.7.7)
+5. Bug: RIDE (The Robot IDE) can screw up your test files in txt + pipes - by
+   altering the format - if you change the preferences. This was experienced
+   while editing `.txt` files with RIDE and saving them as back (in v2.7.7)
 

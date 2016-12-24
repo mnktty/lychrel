@@ -27,6 +27,7 @@
 
 
 import ctypes
+import os
 
 # converged is a C99 bool type - hence 4 bytes
 class Result(ctypes.Structure):
@@ -80,10 +81,13 @@ def run_unit_tests_from_executable():
     # subprocess.check_call(['./checklychrel'])
     
     # but calling this is fine since we set the LD_LIBRARY_PATH
-    v = subprocess.check_output(['env', 'LD_LIBRARY_PATH=:/home/precise/svn/experiment/lychrel', 'valgrind', './checklychrel'], stderr=subprocess.STDOUT)
+    # require valgrind and robot to be installed
+    v = subprocess.check_output(['env', 'LD_LIBRARY_PATH='+os.getcwd(),
+                                 'valgrind', './checklychrel'],
+                                stderr=subprocess.STDOUT)
 
     # let us also log the output in the report
-    logger.info('Output of C unit tests: {0} '.format(v))
+    logger.console('Output of C unit tests: {0} '.format(v))
     if not v.find('All heap blocks were freed -- no leaks are possible'):
         raise AssertionError('Valgrind tests failed - check logs to see memory leak details')
 
@@ -91,13 +95,13 @@ def run_unit_tests_from_executable():
 
 if __name__ == '__main__':
     # verify the programmer's way
-    # check_lychrel_many()
+    check_lychrel_many()
     
     # quick check to ensure script called by Robot works 
-    # verify_lychrel('1', '1', '0')
+    verify_lychrel('1', '1', '0')
 
     # quick check to verify triggering native executable's execution
-    run_unit_tests_from_executable()
+    # run_unit_tests_from_executable()
 
     pass
 

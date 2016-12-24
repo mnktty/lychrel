@@ -1,9 +1,15 @@
+# See http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#tsv-format
+# tab sizes should be the same all over !
+
 
 *** Settings ***
+# where to find the functions
 Library	CheckLychrel.py
 
 
 *** Test Case ***
+# testcases are specified in terms of keywords
+
 Valid Lychrel Numbers
 	Check Lychrel Number	1	1	0
 	Check Lychrel Number	1	1	0
@@ -21,11 +27,20 @@ Valid Lychrel Numbers
 Invalid Lychrel Numbers
 	Check NonLychrel Number	196	13305261530450734933	40
 
+Run Unit Tests Written in C
+	[Documentation]	   Trigger native executable for running unit tests
+	Run C Unit Tests
+
+
 *** Keyword ***
 
+# the keyword calls verify_lychrel() in CheckLychrel.py
 Check Lychrel Number	[arguments]	${num}	${expected_output}	${expected_iterations}
 	Verify Lychrel	${num}	${expected_output}	${expected_iterations}
 
+# how to run the keyword
 Check NonLychrel Number	[arguments]	${num}	${expected_output}	${expected_iterations}
 	Run Keyword And Expect Error	No convergence after 40 iterations 	Verify Lychrel	${num}	${expected_output}	${expected_iterations}
 
+Run C Unit Tests
+	Run Unit Tests From Executable
